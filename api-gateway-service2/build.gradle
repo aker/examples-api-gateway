@@ -1,0 +1,31 @@
+buildscript {
+    repositories {
+        maven {
+            url "$mavenRepoUrl"
+        }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+    }
+}
+
+apply plugin: "org.springframework.boot"
+
+dependencies {
+    compile project(":api-gateway-common-auth-web")
+
+    compile "org.apache.httpcomponents:httpclient:4.5"
+    compile "org.apache.httpcomponents:fluent-hc:4.5.1"
+
+    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    compile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
+
+    testCompile "junit:junit:4.11"
+}
+
+task copyWebStatic(type: Copy) {
+    from "../js-frontend/build"
+    into "build/resources/main/static"
+}
+
+jar.dependsOn(copyWebStatic)
