@@ -1,22 +1,19 @@
 package com.github.aker.apigateway.commonauth;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.token.Token;
+import org.springframework.security.core.token.TokenService;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.aker.apigateway.commonauth.model.User;
 import com.github.aker.apigateway.commonauth.model.UserAuthentication;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.token.Token;
-import org.springframework.security.core.token.TokenService;
-import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-
-@Service
 public class TokenAuthenticationService {
 
-  @Autowired
   private TokenService tokenService;
 
   private static final String AUTH_HEADER_NAME = "access-token";
@@ -24,6 +21,10 @@ public class TokenAuthenticationService {
 
   private ObjectMapper mapper = new ObjectMapper();
 
+  public TokenAuthenticationService(TokenService tokenService) {
+	  this.tokenService = tokenService;
+  }
+  
   public Authentication getAuthentication(HttpServletRequest request) throws IOException {
     final String tokenString = request.getHeader(AUTH_HEADER_NAME);
 

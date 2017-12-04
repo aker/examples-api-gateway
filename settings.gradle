@@ -3,4 +3,3 @@ include "api-gateway-common-auth-web"
 include "api-gateway-service2"
 
 rootProject.name = "examples-api-gateway"
-

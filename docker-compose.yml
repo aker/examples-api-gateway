@@ -91,7 +91,7 @@ ermpservice:
     EVENTUATELOCAL_CDC_DB_PASSWORD: rootpassword
 
 apigateway:
-  build: ./api-gateway-service/
+  build: ./api-gateway-service2/
   restart: unless-stopped
   ports:
     - "8081:8080"

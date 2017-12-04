@@ -35,13 +35,17 @@ import com.github.aker.apigateway.commonauth.model.User;
 @RequestMapping("/api")
 public class AuthController {
 
-  @Autowired
   private TokenService tokenService;
 
-  @Autowired
   private UserAuthService customerAuthService;
 
   private static ObjectMapper objectMapper = new ObjectMapper();
+  
+  @Autowired
+  public AuthController(TokenService tokenService, UserAuthService userAuthService) {
+	  this.tokenService = tokenService;
+	  this.customerAuthService = userAuthService;
+  }
 
   @RequestMapping(value = "/login", method = POST)
   public ResponseEntity<UserAccount> doAuth(@RequestBody @Valid UserCredentials request) throws IOException {

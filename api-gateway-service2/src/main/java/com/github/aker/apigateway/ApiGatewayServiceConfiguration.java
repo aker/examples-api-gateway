@@ -1,7 +1,9 @@
-package com.github.aker.apigateway.web;
+package com.github.aker.apigateway;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.aker.apigateway.commonauth.AuthConfiguration;
+import com.github.aker.apigateway.web.ApiGatewayProperties;
+import com.github.aker.apigateway.web.RestTemplateErrorHandler;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClients;
