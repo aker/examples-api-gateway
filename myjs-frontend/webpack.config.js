@@ -67,7 +67,12 @@ const config = (() => {
         {
           devtool: 'source-map'
         },
-        parts.setupLess(PATHS.styleLess)
+        parts.setupLess(PATHS.styleLess),
+        parts.devServer({
+          // Customize host/port here if needed
+          host: process.env.HOST,
+          port: process.env.PORT
+        })
       );
   }
 

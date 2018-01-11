@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --progress --colors --watch --display-error-details --display-chunks --profile",
+    "start-dev": "export PORT=3000 && webpack-dev-server --host 0.0.0.0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "aker",
@@ -20,10 +21,12 @@
     "purifycss-webpack-plugin": "^2.0.3",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.10.1",
     "webpack-merge": "^4.1.1"
   },
   "dependencies": {
     "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
     "react": "^16.2.0",
     "react-select": "^1.2.0"
   }

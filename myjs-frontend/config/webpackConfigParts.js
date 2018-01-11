@@ -1,6 +1,44 @@
+const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack-plugin');
+
+exports.devServer = function(options) {
+  return {
+    entry: {
+      'webpack-dev-server': 'webpack-dev-server/client?http://localhost:8080',
+      hmr: 'webpack/hot/only-dev-server'
+    },
+    devServer: {
+      contentBase: './dist',
+      hot: true,
+      historyApiFallback: true,
+      inline: true,
+      stats: 'errors-only',
+      host: options.host, // Defaults to `localhost`
+      port: options.port, // Defaults to 8080
+      proxy: {
+        '/api*' : {
+          target: 'http://localhost:8080'
+        }
+      }
+    },
+    watchOptions: {
+      // Delay the rebuild after the first change
+      aggregateTimeout: 300,
+      // Poll using interval (in ms, accepts boolean too)
+      poll: 1000
+    },
+    plugins: [
+      // Enable multi-pass compilation for enhanced performance
+      // in larger projects. Good default.
+      new webpack.HotModuleReplacementPlugin({
+        multiStep: true
+      })
+    ]
+
+  };
+};
 
 exports.setupLess = function(paths) {
   return {
