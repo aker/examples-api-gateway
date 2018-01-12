@@ -3,7 +3,18 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const pkg = require('./package.json');
+
 const parts = require('./config/webpackConfigParts');
+
+const ENTRIES = Object.keys(pkg.dependencies);
+const CSS_ENTIRES = [
+  //'bootstrap-horizon'
+];
+
+const JS_ENTRIES = ENTRIES.filter(p => CSS_ENTIRES.indexOf(p) < 0);
 
 const PATHS = {
   app: path.join(__dirname, 'src'),
@@ -26,6 +37,13 @@ const common = {
     filename: '[name].js'
   },
   plugins: [
+    new CopyWebpackPlugin([
+      { from: 'public/**', to: PATHS.build, flatten: true }
+    ], {
+      ignore: [
+        '*.ejs'
+      ]
+    }),
     new HtmlWebpackPlugin({
       // Required
       inject: false,
@@ -59,6 +77,10 @@ const config = (() => {
           }
         },
         parts.clean(path.join(PATHS.build, '*')),
+        parts.extractBundle({
+          name: 'vendor',
+          entries: JS_ENTRIES
+        }),
         parts.setupLess(PATHS.styleLess)
       );
     default:
@@ -67,6 +89,10 @@ const config = (() => {
         {
           devtool: 'source-map'
         },
+        parts.extractBundle({
+          name: 'vendor',
+          entries: JS_ENTRIES
+        }),
         parts.setupLess(PATHS.styleLess),
         parts.devServer({
           // Customize host/port here if needed
