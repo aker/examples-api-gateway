@@ -89,14 +89,11 @@ exports.extractLESS = function(paths) {
       rules: [
         {
           test: /\.css$/,
-          use: ExtractTextPlugin.extract({
-            fallback: "style-loader",
-            use: "css-loader"
-          })
+          use: ExtractTextPlugin.extract(['css-loader'])
         },
         {
           test: /\.less$/,
-          use: ExtractTextPlugin.extract([ 'css-loader', 'less-loader' ])
+          use: ExtractTextPlugin.extract(['css-loader', 'less-loader'])
         }
       ]
     },
