@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ 20:
+/***/ 18:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22,5 +22,5 @@ document.body.appendChild(component());
 
 /***/ })
 
-},[20]);
-//# sourceMappingURL=app.9ed7335b4c841b2d4d31.js.map
+},[18]);
+//# sourceMappingURL=app.e80e3230ca611071e6b6.js.map

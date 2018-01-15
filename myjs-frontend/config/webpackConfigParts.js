@@ -86,17 +86,17 @@ exports.clean = function(path) {
 exports.extractLESS = function(paths) {
   return {
     module: {
-      loaders: [
-        // Extract CSS during build
+      rules: [
         {
-          test: /\.(le)|(c)ss$/,
-          // loaders: ['style', 'css', 'less'],
-          loader: ExtractTextPlugin.extract(
-            "style-loader",
-            'css?sourceMap!' +
-            'less?sourceMap'
-          ),
-          include: paths
+          test: /\.css$/,
+          use: ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: "css-loader"
+          })
+        },
+        {
+          test: /\.less$/,
+          use: ExtractTextPlugin.extract([ 'css-loader', 'less-loader' ])
         }
       ]
     },

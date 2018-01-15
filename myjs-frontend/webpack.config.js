@@ -81,7 +81,7 @@ const config = (() => {
           name: 'vendor',
           entries: JS_ENTRIES
         }),
-        parts.setupLess(PATHS.styleLess)
+        parts.extractLESS(PATHS.styleLess)
       );
     default:
       return merge(
