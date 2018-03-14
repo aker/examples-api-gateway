@@ -4,15 +4,18 @@ import { Provider } from 'react-redux'
 import reducer from './reducer';
 import App from './App';
 import { Router, Route, hashHistory } from 'react-router';
+import { Container } from './components/partials/Container';
 
 const store = createStore(reducer);
 
 class MyApp extends React.Component {
   render() {
     return (
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <Container>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </Container>
     );
   }
 }
