@@ -1,13 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import { Router, Route, hashHistory } from 'react-router';
-
-import MyApp from './index';
-
-ReactDOM.render(
-  <Router history={hashHistory}>
-    <Route path="/" component={MyApp}/>
-  </Router>,
-  document.getElementById('root')
-);
+import { initialize } from './index';
+/**
+ * Fire-up React Router.
+ */
+initialize().then(({ provider }) => {
+  const reactRoot = window.document.getElementById("root");
+  ReactDOM.render(provider, reactRoot);
+});
