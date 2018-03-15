@@ -3,28 +3,39 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducer';
 import App from './App';
-import { Router, Route, hashHistory } from 'react-router';
+import { Router, IndexRoute, Route, hashHistory } from 'react-router';
 import { Container } from './components/partials/Container';
 
-const store = createStore(reducer);
-
-class MyApp extends React.Component {
+class BaseApp extends React.Component {
   render() {
     return (
       <Container>
-        <Provider store={store}>
-          <App />
-        </Provider>
+        {this.props.children}
       </Container>
     );
   }
 }
 
 export function initialize({cookies, isServer, currentLocation, userAgent} = {}) {
+
+  const store = createStore(reducer);
+
+  class Home extends React.Component {
+    render() {
+      return (
+        <Provider store={store}>
+          <App />
+        </Provider>);
+    }
+  }
+
   const routes = (
     <Router history={hashHistory}>
-      <Route path="/" component={MyApp}/>
+      <Route path="/" component={BaseApp}>
+        <IndexRoute component={ Home }/>
+      </Route>
     </Router>
   );
+
   return Promise.resolve({provider:routes});
 }
