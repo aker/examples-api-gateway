@@ -11,6 +11,9 @@ import { PageHeader, OverlayTrigger, Tooltip, Row, ButtonGroup, Table } from "re
 import * as BS from "react-bootstrap";
 import { Link, IndexLink} from "react-router";
 
+//import { EmailSignUpForm } from "redux-auth/bootstrap-theme"
+import EmailSignUpForm from "../controls/bootstrap/EmailSignUpForm";
+
 export class SignUp extends React.Component {
 
   checkRedirect(props) {
@@ -33,14 +36,11 @@ export class SignUp extends React.Component {
     return (
       <BS.Well>
         <BS.PageHeader>Register</BS.PageHeader>
+        <EmailSignUpForm />
       </BS.Well>
     );
 
   }
 }
-export default connect(({
-  routes,
-  app
-}) => ({routes,
-  isAuthenticated: read(app, 'auth.user.isSignedIn', false)
-}))(SignUp);
+
+export default SignUp;

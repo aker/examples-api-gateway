@@ -4,6 +4,7 @@
 import React, { PropTypes } from "react";
 import { Grid, Col, Navbar, NavItem, Nav, NavbarBrand, Footer } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import HeaderLinks from '../HeaderLinks';
 
 export class Container extends React.Component {
   static propTypes = {
@@ -22,6 +23,9 @@ export class Container extends React.Component {
               <NavItem eventKey={1}>Home</NavItem>
             </LinkContainer>
           </Nav>
+          <div>
+            <HeaderLinks />
+          </div>
         </Navbar>
 
         <Grid className="content">
