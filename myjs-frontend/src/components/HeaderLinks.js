@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { LinkContainer } from "react-router-bootstrap";
 import * as BS from "react-bootstrap";
 import read from '../utils/readProp';
+import { signOut } from '../actions/signOut';
 
 
 export class HeaderLinks extends React.Component {
@@ -17,7 +18,12 @@ export class HeaderLinks extends React.Component {
   render() {
 
     let buttonSet = null;
-    const condition = 0;
+    const isSignedIn = read(this.props.auth, 'user.isSignedIn', false);
+    const { location } = this.props.router;
+    const isRegister = location.pathname == '/register';
+    const isLogin = location.pathname == '/signin';
+
+    const condition = isSignedIn ? 2 : (isRegister ? 1 : 0);
     
     switch (condition) {
       case 0:
@@ -43,4 +49,12 @@ export class HeaderLinks extends React.Component {
   }
 }
 
-export default HeaderLinks;
+export default connect(({
+  //dispatch,
+  router,
+  app
+  }) => ({
+  //dispatch,
+  router,
+  auth: app.auth
+}))(HeaderLinks);

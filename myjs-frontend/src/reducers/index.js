@@ -3,10 +3,10 @@
  */
 import { combineReducers } from 'redux';
 
-import uiReducer from './ui'
+import authStateReducer from './auth';
 
 const mainReducer = combineReducers({
-  ui: uiReducer
+  auth:   authStateReducer
 });
 
 export default mainReducer;
