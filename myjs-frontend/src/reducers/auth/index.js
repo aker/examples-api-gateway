@@ -3,9 +3,11 @@
  */
 import { combineReducers } from 'redux';
 
+import { signUpReducer } from './signup';
 import { userReducer } from './user';
 
 const authStateReducer = combineReducers({
+  signUp: signUpReducer,
   user: userReducer
 });
 

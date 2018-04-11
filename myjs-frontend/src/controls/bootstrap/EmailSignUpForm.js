@@ -10,7 +10,7 @@ import IndexPanel from "./../../components/partials/IndexPanel";
 import AuxErrorLabel from './AuxErrorLabel';
 import { customerInfoMap } from '../../entities/formToPayloadMappers';
 import read from '../../utils/readProp';
-//import * as AS from '../../actions/signUp';
+import * as AS from '../../actions/signUp';
 
 const formValidation = (payload) => [
   'fname',
@@ -59,7 +59,7 @@ const formValidation = (payload) => [
 class EmailSignUpForm extends React.Component {
 
   handleInput (key, val) {
-    //this.props.dispatch(AS.emailSignUpFormUpdate(key, val));
+    this.props.dispatch(AS.emailSignUpFormUpdate(key, val));
   }
 
   handleSubmit (event) {
@@ -68,16 +68,19 @@ class EmailSignUpForm extends React.Component {
     const formData = read(this.props.auth, 'signUp.form');
     const validationErrors = formValidation(formData);
     if (validationErrors.hasErrors) {
-      //this.props.dispatch(AS.emailSignUpError(validationErrors));
+      this.props.dispatch(AS.emailSignUpError(validationErrors));
       return;
     }
 
-    //this.props.dispatch(AS.emailSignUp(customerInfoMap(formData)));
+    this.props.dispatch(AS.emailSignUp(customerInfoMap(formData)));
   }
 
   render () {
 
-    const disabled = false;
+    const disabled = (
+      this.props.auth.user.isSignedIn ||
+      this.props.auth.signUp.loading
+    );
 
     const formErrors = read(this.props.auth, 'signUp.errors.errors', '');
 
@@ -248,4 +251,4 @@ class EmailSignUpForm extends React.Component {
   }
 }
 
-export default EmailSignUpForm;
+export default connect(({app}) => ({auth: app.auth}))(EmailSignUpForm);

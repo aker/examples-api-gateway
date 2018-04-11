@@ -54,7 +54,7 @@ export function initialize({cookies, isServer, currentLocation, userAgent} = {})
   const routes = (
     <Route path="/" component={BaseApp}>
       <IndexRoute component={ Home }/>
-      <Route path="register" component={ SignUp } />
+      <Route path="register" component={ SignUp } onEnter={ onEnter } />
     </Route>
   );
 
@@ -70,6 +70,8 @@ export function initialize({cookies, isServer, currentLocation, userAgent} = {})
       createHistory: createHistoryMethod
     })
   )(createStore)(reducer);
+
+  dispatch = store.dispatch;
 
   console.log(store.getState());
 

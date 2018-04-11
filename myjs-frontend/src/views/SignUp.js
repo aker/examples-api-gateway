@@ -42,5 +42,9 @@ export class SignUp extends React.Component {
 
   }
 }
-
-export default SignUp;
+export default connect(({
+  routes,
+  app
+}) => ({routes,
+  isAuthenticated: read(app, 'auth.user.isSignedIn', false)
+}))(SignUp);
