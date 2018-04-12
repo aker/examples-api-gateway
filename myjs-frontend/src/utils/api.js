@@ -7,7 +7,7 @@ import root from './root';
 const JSON_HEADERS = {
   headers: {
     "Accept": "application/json",
-      "Content-Type": "application/json"
+    "Content-Type": "application/json"
   }
 };
 

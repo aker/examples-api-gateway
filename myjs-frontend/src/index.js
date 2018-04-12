@@ -19,6 +19,7 @@ import mainReducer from './reducers';
 import { visitLocation } from './actions/navigate';
 import App from './App';
 import { Container } from './components/partials/Container';
+import SignIn from "./views/SignIn";
 import SignUp from "./views/SignUp";
 
 class BaseApp extends React.Component {
@@ -54,6 +55,7 @@ export function initialize({cookies, isServer, currentLocation, userAgent} = {})
   const routes = (
     <Route path="/" component={BaseApp}>
       <IndexRoute component={ Home }/>
+      <Route path="signin" component={ SignIn } onEnter={ onEnter } />
       <Route path="register" component={ SignUp } onEnter={ onEnter } />
     </Route>
   );
