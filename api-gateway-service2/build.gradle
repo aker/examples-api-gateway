@@ -26,7 +26,7 @@ dependencies {
 }
 
 task copyWebStatic(type: Copy) {
-    from "../js-frontend/build"
+    from "../myjs-frontend/dist"
     into "build/resources/main/static"
 }
 

@@ -1,5 +1,9 @@
 package com.github.aker.apigateway.web;
 
+
+import com.github.aker.apigateway.utils.ContentRequestTransformer;
+import com.github.aker.apigateway.utils.HeadersRequestTransformer;
+import com.github.aker.apigateway.utils.URLRequestTransformer;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -16,10 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
-
-import com.github.aker.apigateway.utils.ContentRequestTransformer;
-import com.github.aker.apigateway.utils.HeadersRequestTransformer;
-import com.github.aker.apigateway.utils.URLRequestTransformer;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -55,9 +55,9 @@ public class GatewayController {
   @ResponseBody
   public ResponseEntity<String> proxyRequest(HttpServletRequest request) throws NoSuchRequestHandlingMethodException, IOException, URISyntaxException {
     HttpUriRequest proxiedRequest = createHttpUriRequest(request);
-    logger.info("request: {}", proxiedRequest);
+    logger.info("proxy Request: {}", proxiedRequest);
     HttpResponse proxiedResponse = httpClient.execute(proxiedRequest);
-    logger.info("Response {}", proxiedResponse.getStatusLine().getStatusCode());
+    logger.info("proxy Response {}", proxiedResponse.getStatusLine().getStatusCode());
     return new ResponseEntity<>(read(proxiedResponse.getEntity().getContent()), makeResponseHeaders(proxiedResponse), HttpStatus.valueOf(proxiedResponse.getStatusLine().getStatusCode()));
   }
 

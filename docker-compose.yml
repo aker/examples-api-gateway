@@ -58,7 +58,7 @@ eventuatedb:
     - MYSQL_PASSWORD=mysqlpw
 
 ermpdb:
-  build: ./mysql
+  build: ../eventuate-examples-ermp/mysql
   ports:
     - 4306:3306
   environment:
@@ -67,7 +67,7 @@ ermpdb:
     - MYSQL_PASSWORD=mysqlpw
 
 ermpservice:
-  build: ./ermp-service/
+  build: ../eventuate-examples-ermp/ermp-service
   restart: unless-stopped
   ports:
     - "8080:8080"
@@ -90,12 +90,12 @@ ermpservice:
     EVENTUATELOCAL_CDC_DB_USER_NAME: root
     EVENTUATELOCAL_CDC_DB_PASSWORD: rootpassword
 
-apigateway:
-  build: ./api-gateway-service2/
-  restart: unless-stopped
-  ports:
-    - "8081:8080"
-  links:
-    - ermpservice
-  environment:
-    ERMP_SERVICE_HOST: ermpservice
+#apigateway:
+#  build: ./api-gateway-service2/
+#  restart: unless-stopped
+#  ports:
+#    - "8081:8080"
+#  links:
+#    - ermpservice
+#  environment:
+#    ERMP_SERVICE_HOST: ermpservice
